@@ -10,7 +10,6 @@ const Book = ({ book }) => {
     tags,
     category,
     rating,
-    totalPages,
   } = book;
   return (
    <Link to={`/books/${bookId}`}> <div>
