@@ -9,6 +9,7 @@ const Book = ({ book }) => {
     author,
     tags,
     category,
+    totalPages,
     rating,
   } = book;
   return (
@@ -32,6 +33,7 @@ const Book = ({ book }) => {
        <hr className="border-b-2 border-dashed" />
        <div className="flex justify-between">
          <p>{category}</p>
+         <p> Total Pages:{totalPages}</p>
          <p className="flex items-center gap-2">{rating} <span className="text-xl"> <CiStar /></span></p>
        </div>
      </div>
