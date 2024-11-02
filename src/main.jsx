@@ -14,6 +14,7 @@ import BookDetail from './components/BookDetail/BookDetail.jsx';
 import ListedBooks from './ListtedBooks/ListedBooks.jsx';
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import PagesChart from './components/PagesChart/PagesChart.jsx';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path:'listedBooks',
         element: <ListedBooks></ListedBooks>,
         loader:()=> fetch('/booksData.json')
+      },
+      {
+        path:'/pagesRead',
+        element:<PagesChart></PagesChart>
       },
       {
         path:'dashbord',
