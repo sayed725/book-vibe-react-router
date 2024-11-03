@@ -21,7 +21,7 @@ const addToStoredReadList = (id) =>{
     }
     const storedListStr = JSON.stringify(storedList)
     localStorage.setItem('read-list' , storedListStr)
-    toast.success('This Book is added to your ReadList')
+    toast.success('This Book is added to your ReadList!')
 
 }
 
