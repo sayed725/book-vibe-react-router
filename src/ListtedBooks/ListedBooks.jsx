@@ -4,24 +4,34 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { getStoredReadList } from "../components/Utiliti/addToDB";
 import Book from "../components/Book/Book";
+import { getStoredWishList } from "../components/Utiliti/WishlistAdd";
 
 const ListedBooks = () => {
   const [readList, setReadList] = useState([]);
-  const [sort, setSort] = useState('')
+  const [wishList, setWishList] = useState([]);
+  const [sort, setSort] = useState("");
 
-  const handleSort = sortType =>{
-    setSort(sortType)
+  const handleSort = (sortType) => {
+    setSort(sortType);
 
-    if (sortType === 'No of Pages'){
-        const sortedReadList = [...readList].sort((a,b)=> a.totalPages - b.totalPages)
-        setReadList(sortedReadList)
+    if (sortType === "No of Pages") {
+      const sortedReadList = [...readList].sort( (a, b) => a.totalPages - b.totalPages );
+      setReadList(sortedReadList);
+      const sortedWishList = [...wishList].sort((a, b) => a.totalPages - b.totalPages);
+      setWishList(sortedWishList);
     }
-    if (sortType === 'Ratings'){
-        const sortedReadList = [...readList].sort((a,b)=> b.rating - a.rating)
-        setReadList(sortedReadList)
+    if (sortType === "Ratings") {
+      const sortedReadList = [...readList].sort((a, b) => b.rating - a.rating);
+      setReadList(sortedReadList);
+      const sortedWishList = [...wishList].sort((a, b) => b.rating - a.rating);
+      setWishList(sortedWishList);
     }
-    }
-  
+  };
+
+  useEffect(() => {
+    const storedWishList = getStoredWishList();
+    setWishList(storedWishList);
+  }, []);
 
   const allBooks = useLoaderData();
 
@@ -40,18 +50,16 @@ const ListedBooks = () => {
 
       <div className="dropdown max-w-fit flex mx-auto pb-10">
         <div tabIndex={0} role="button" className="btn m-1">
-         {
-            sort? `Sort By ${sort}`: 'Sort By' 
-         }
+          {sort ? `Sort By ${sort}` : "Sort By"}
         </div>
         <ul
           tabIndex={0}
           className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
         >
-          <li onClick={()=> handleSort('Ratings')}>
+          <li onClick={() => handleSort("Ratings")}>
             <a>Ratings</a>
           </li>
-          <li onClick={()=> handleSort('No of Pages')}>
+          <li onClick={() => handleSort("No of Pages")}>
             <a>No of Pages</a>
           </li>
         </ul>
@@ -70,7 +78,11 @@ const ListedBooks = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
+            {wishList.map((book) => (
+              <Book key={book.bookId} book={book}></Book>
+            ))}
+          </div>
         </TabPanel>
       </Tabs>
     </div>

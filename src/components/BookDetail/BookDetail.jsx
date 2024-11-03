@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { addToStoredReadList } from "../Utiliti/addToDB";
-import { AddToStoredWishList } from "../Utiliti/WishlistAdd";
+import { addToStoredWishList } from "../Utiliti/WishlistAdd";
+
 
 const BookDetail = () => {
   const { bookId } = useParams();
@@ -28,7 +29,7 @@ const BookDetail = () => {
     }
 
     const handleMarkAsWishList = (book)=>{
-        AddToStoredWishList(book)
+       addToStoredWishList(book)
     }
 
 
